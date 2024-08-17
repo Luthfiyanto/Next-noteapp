@@ -1,13 +1,15 @@
+"use client";
+
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
-import { useRouter } from "next/router";
 import { CREATE_NOTE } from "@/libs/graphql/mutations";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Add() {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [createNote] = useMutation(CREATE_NOTE);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +21,6 @@ export default function Add() {
           body,
         },
       });
-
       router.push("/");
     } catch (error) {
       console.error(error);
